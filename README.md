@@ -36,6 +36,32 @@ $ docker exec harvester bash -c "touch /home/logio/test.log"
 $ docker exec harvester bash -c "echo "Hello World" >> /home/logio/test.log"
 ~~~~
 
+Test root:
+
+~~~~
+$ docker run -d \
+    -e "LOGIO_HARVESTER_LOGFILES=/var/log/yum.log" \
+    --link logio:logio \
+    --name harvester \
+    blacklabelops/logio harvester
+~~~~
+
+# Harvest Root Files
+
+Yes, you can also harvest files under root permissions, just start the harvest container
+as user root!
+
+~~~~
+$ docker run -d \
+    -e "LOGIO_HARVESTER_LOGFILES=/var/log/yum.log" \
+    --link logio:logio \
+    --name harvester \
+    --user root \
+    blacklabelops/logio harvester
+~~~~
+
+> The user parameter works both with username and userid.
+
 ## References
 
 * [Log.io](http://logio.org/)

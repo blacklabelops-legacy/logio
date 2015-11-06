@@ -1,23 +1,23 @@
 #!/bin/bash -x
 set -o errexit
 
-mkdir -p /home/logio/.log.io
+mkdir -p ~/.log.io
 
-cat > /home/logio/.log.io/web_server.conf <<_EOF_
+cat > ~/.log.io/web_server.conf <<_EOF_
 exports.config = {
   host: '0.0.0.0',
   port: 28778,
 }
 _EOF_
-cat /home/logio/.log.io/web_server.conf
+cat ~/.log.io/web_server.conf
 
-cat > /home/logio/.log.io/log_server.conf <<_EOF_
+cat > ~/.log.io/log_server.conf <<_EOF_
 exports.config = {
   host: '0.0.0.0',
   port: 28777
 }
 _EOF_
-cat /home/logio/.log.io/log_server.conf
+cat ~/.log.io/log_server.conf
 
 logio_nodename="node"
 
@@ -52,7 +52,7 @@ do
 done
 IFS=$SAVEIFS
 
-cat > /home/logio/.log.io/harvester.conf <<_EOF_
+cat > ~/.log.io/harvester.conf <<_EOF_
 exports.config = {
   nodeName: "${logio_nodename}",
   logStreams: {
@@ -66,7 +66,7 @@ exports.config = {
   }
 }
 _EOF_
-cat /home/logio/.log.io/harvester.conf
+cat ~/.log.io/harvester.conf
 
 
 if [ "$1" = 'logio' ]; then
