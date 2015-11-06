@@ -69,21 +69,51 @@ IFS=' '
 COUNTER=0
 for logfile in $harvester_log_files
 do
-  if [ "$COUNTER" -eq "0" ]; then
-    LOG_FILES=$LOG_FILES\"${logfile}\"
-  else
-    LOG_FILES=$LOG_FILES ,\"${logfile}\"
-  fi
-  let COUNTER=COUNTER+1
+  LOG_FILES=$LOG_FILES\"${logfile}\",$'\n'
 done
 IFS=$SAVEIFS
+
+log_dirs=""
+
+if [ -n "${LOGS_DIRECTORIES}" ]; then
+  log_dirs=${LOGS_DIRECTORIES}
+fi
+
+log_file_pattern=""
+
+if [ -n "${LOG_FILE_PATTERN}" ]; then
+  log_file_pattern=${LOG_FILE_PATTERN}
+fi
+
+SAVEIFS=$IFS
+IFS=' '
+for pattern in "${log_file_pattern}"
+do
+  for d in ${log_dirs}
+  do
+    LOG_PATTERN_FILES=
+    IFS=$SAVEIFS
+    for foundfile in $(find ${d} -type f -iname "${pattern}");
+    do
+      LOG_PATTERN_FILES=$LOG_PATTERN_FILES\"${foundfile}\",$'\n'
+    done
+    IFS=' '
+  done
+done
+IFS=$SAVEIFS
+
+ATTACH_LOGS=${LOG_FILES}${LOG_PATTERN_FILES}
+
+if [ -n "${ATTACH_LOGS}" ]; then
+  ATTACH_LOGS=${ATTACH_LOGS::-2}
+fi
 
 cat > ~/.log.io/harvester.conf <<_EOF_
 exports.config = {
   nodeName: "${logio_nodename}",
   logStreams: {
     ${logio_streamname}: [
-      ${LOG_FILES}
+      ${ATTACH_LOGS}
     ]
   },
   server: {

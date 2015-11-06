@@ -74,6 +74,8 @@ $ docker run -d \
     blacklabelops/logio
 ~~~~
 
+> Note: Webserver will use same port for HTTPS!
+
 Using your own certificates: Name your certificate 'server.crt' and key 'server.key' and mount them inside the
 container at location '/opt/server/keys'.
 
@@ -85,10 +87,12 @@ $ docker run -d \
     -e "LOGIO_ADMIN_USER=admin" \
     -e "LOGIO_ADMIN_PASSWORD=yourpasswordhere" \
     -e "LOGIO_CERTIFICATE_DNAME=HTTPS" \
-    -v /yourcertificatepath://opt/server/keys \
+    -v /yourcertificatepath:/opt/server/keys \
     --name logio \
     blacklabelops/logio
 ~~~~
+
+> Note: Webserver will use same port for HTTPS!
 
 # Harvest Root Files
 
@@ -105,6 +109,22 @@ $ docker run -d \
 ~~~~
 
 > The user parameter works both with username and userid. Note: This container only knows users root (uid:0) and logio (uid:1000). In order to introduce new users, you will have to extend the image!
+
+# Harvester Crawl for Log Files
+
+Log file pattern with the ability to define file patterns.
+
+~~~~
+$ docker run -d \
+  -e "LOGS_DIRECTORIES=/var/log" \
+  --link logio:logio \
+	-e "LOG_FILE_PATTERN=*" \
+  --name harvester \
+  --user root \
+  blacklabelops/logio harvester
+~~~~
+
+> Attaches to all files inside those folders
 
 ## References
 
