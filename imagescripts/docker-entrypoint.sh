@@ -19,13 +19,13 @@ exports.config = {
 _EOF_
 cat /home/logio/.log.io/log_server.conf
 
-logio_nodename="node1"
+logio_nodename="node"
 
 if [ -n "${LOGIO_HARVESTER_NODENAME}" ]; then
   logio_nodename=${LOGIO_HARVESTER_NODENAME}
 fi
 
-logio_streamname="stream1"
+logio_streamname="stream"
 
 if [ -n "${LOGIO_HARVESTER_STREAMNAME}" ]; then
   logio_streamname=${LOGIO_HARVESTER_STREAMNAME}

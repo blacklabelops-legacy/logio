@@ -1,4 +1,4 @@
-FROM blacklabelops/java-jre-8
+FROM blacklabelops/centos
 MAINTAINER Steffen Bleul <sbl@blacklabelops.com>
 
 # Propert permissions
