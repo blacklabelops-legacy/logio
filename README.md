@@ -1,4 +1,6 @@
-Log.io inside a resuable Docker container.
+Log.io inside Docker container.
+
+Leave a message and ask questions on Hipchat: [blacklabelops/hipchat](https://www.hipchat.com/geogBFvEM)
 
 # Make It Short!
 
