@@ -1,10 +1,12 @@
-Log.io inside Docker container.
+[![Circle CI](https://circleci.com/gh/blacklabelops/logio/tree/master.svg?style=shield)](https://circleci.com/gh/blacklabelops/logio/tree/master)
+[![Image Layers](https://badge.imagelayers.io/blacklabelops/logio:latest.svg)](https://imagelayers.io/?images=blacklabelops/logio:latest 'Get your own badge on imagelayers.io')
+[![Docker Repository on Quay](https://quay.io/repository/blacklabelops/logio/status "Docker Repository on Quay")](https://quay.io/repository/blacklabelops/logio)
 
 Leave a message and ask questions on Hipchat: [blacklabelops/hipchat](https://www.hipchat.com/geogBFvEM)
 
 # Make It Short!
 
-In short, this container puts a UI on your Docker logs!
+In short, this container puts an UI on your Docker logs!
 
 First start the server!
 
