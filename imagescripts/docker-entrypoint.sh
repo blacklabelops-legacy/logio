@@ -1,7 +1,11 @@
-#!/bin/bash -x
+#!/bin/bash
 set -o errexit
 
 mkdir -p ~/.log.io
+
+if [ -n "${DELAYED_START}" ]; then
+  sleep ${DELAYED_START}
+fi
 
 cat > ~/.log.io/web_server.conf <<_EOF_
 exports.config = {

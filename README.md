@@ -4,6 +4,36 @@ Leave a message and ask questions on Hipchat: [blacklabelops/hipchat](https://ww
 
 # Make It Short!
 
+In short, this container puts a UI on your Docker logs!
+
+First start the server!
+
+~~~~
+$ docker run -d \
+    -p 28778:28778 \
+    --name logio \
+    blacklabelops/logio
+~~~~
+
+> Browser: Localhost: http://localhost:28778/, Docker-Tools (Windows, Mac): http://192.168.99.100:28778/
+
+Now Harvest Your Docker Logs!
+
+~~~~
+$ docker run -d \
+	-v /var/log/docker:/var/log/docker \
+  -e "LOGS_DIRECTORIES=/var/log/docker" \
+  --link logio:logio \
+	-e "LOG_FILE_PATTERN=*.log" \
+  --name harvester \
+  --user root \
+  blacklabelops/logio harvester
+~~~~
+
+> This will harvest all your Docker logfiles and stream them to your webserver.
+
+# How It Works
+
 You can view any logs in your browser!
 
 First start the server!
