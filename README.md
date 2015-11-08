@@ -8,6 +8,16 @@ Leave a message and ask questions on Hipchat: [blacklabelops/hipchat](https://ww
 
 In short, this container puts an UI on your Docker logs!
 
+Recommended: Docker-Compose! Just curl the files and modify the environment-variables inside
+the .env-files.
+
+~~~~
+$ curl -O https://raw.githubusercontent.com/blacklabelops/logio/master/docker-compose.yml
+$ docker-compose up -d
+~~~~
+
+> Browser: Localhost: http://localhost:28778/, Docker-Tools (Windows, Mac): http://192.168.99.100:28778/
+
 First start the server!
 
 ~~~~
@@ -23,8 +33,8 @@ Now Harvest Your Docker Logs!
 
 ~~~~
 $ docker run -d \
-	-v /var/log/docker:/var/log/docker \
-  -e "LOGS_DIRECTORIES=/var/log/docker" \
+	-v /var/lib/docker:/var/lib/docker \
+  -e "LOGS_DIRECTORIES=/var/lib/docker" \
   --link logio:logio \
 	-e "LOG_FILE_PATTERN=*.log" \
   --name harvester \
@@ -159,6 +169,26 @@ $ docker run -d \
 ~~~~
 
 > Attaches to all files inside those folders
+
+# Vagrant
+
+Vagrant is fabulous tool for pulling and spinning up virtual machines like docker with containers. I can configure my development and test environment and simply pull it online. And so can you! Install Vagrant and Virtualbox and spin it up. Change into the project folder and build the project on the spot!
+
+~~~~
+$ vagrant up
+$ vagrant ssh
+[vagrant@localhost ~]$ cd /vagrant
+[vagrant@localhost ~]$ docker-compose up
+~~~~
+
+> Log.io will be available on localhost:28778 on the host machine.
+
+Vagrant does not leave any docker artifacts on your beloved desktop and the vagrant image can simply be destroyed and repulled if anything goes wrong. Test my project to your heart's content!
+
+First install:
+
+* [Vagrant](https://www.vagrantup.com/)
+* [Virtualbox](https://www.virtualbox.org/)
 
 ## References
 
