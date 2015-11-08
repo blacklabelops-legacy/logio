@@ -1,4 +1,4 @@
-FROM blacklabelops/centos:7.1.503
+FROM blacklabelops/centos
 MAINTAINER Steffen Bleul <sbl@blacklabelops.com>
 
 # Propert permissions
@@ -23,7 +23,7 @@ RUN curl --silent --location https://rpm.nodesource.com/setup | bash - && \
     yum clean all && rm -rf /var/cache/yum/* && \
     mkdir -p ${VOLUME_DIRECTORY}/keys && \
     chown -R $CONTAINER_UID:$CONTAINER_GID ${VOLUME_DIRECTORY}/keys && \
-    npm install -g log.io@0.3.4 --user 'root'
+    npm install -g log.io --user 'root'
 
 ENV DELAYED_START=
 ENV LOGIO_ADMIN_USER=
