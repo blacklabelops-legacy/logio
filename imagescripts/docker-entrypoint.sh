@@ -96,7 +96,7 @@ do
   for d in ${log_dirs}
   do
     LOG_PATTERN_FILES=
-    IFS=$SAVEIFS
+    IFS='\n'
     for foundfile in $(find ${d} -type f -iname "${pattern}");
     do
       LOG_PATTERN_FILES=$LOG_PATTERN_FILES\"${foundfile}\",$'\n'
