@@ -1,6 +1,8 @@
 [![Circle CI](https://circleci.com/gh/blacklabelops/logio/tree/master.svg?style=shield)](https://circleci.com/gh/blacklabelops/logio/tree/master)
 [![Image Layers](https://badge.imagelayers.io/blacklabelops/logio:latest.svg)](https://imagelayers.io/?images=blacklabelops/logio:latest 'Get your own badge on imagelayers.io')
-[![Docker Repository on Quay](https://quay.io/repository/blacklabelops/logio/status "Docker Repository on Quay")](https://quay.io/repository/blacklabelops/jenkins)
+[![Docker Repository on Quay](https://quay.io/repository/blacklabelops/logio/status "Docker Repository on Quay")](https://quay.io/repository/blacklabelops/logio)
+
+[![Deploy to Tutum](https://s.tutum.co/deploy-to-tutum.svg)](https://dashboard.tutum.co/stack/deploy/)
 
 Leave a message and ask questions on Hipchat: [blacklabelops/hipchat](https://www.hipchat.com/geogBFvEM)
 
