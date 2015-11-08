@@ -1,6 +1,6 @@
 [![Circle CI](https://circleci.com/gh/blacklabelops/logio/tree/master.svg?style=shield)](https://circleci.com/gh/blacklabelops/logio/tree/master)
 [![Image Layers](https://badge.imagelayers.io/blacklabelops/logio:latest.svg)](https://imagelayers.io/?images=blacklabelops/logio:latest 'Get your own badge on imagelayers.io')
-[![Docker Repository on Quay](https://quay.io/repository/blacklabelops/logio/status "Docker Repository on Quay")](https://quay.io/repository/blacklabelops/logio)
+[![Docker Repository on Quay](https://quay.io/repository/blacklabelops/logio/status "Docker Repository on Quay")](https://quay.io/repository/blacklabelops/jenkins)
 
 Leave a message and ask questions on Hipchat: [blacklabelops/hipchat](https://www.hipchat.com/geogBFvEM)
 
@@ -14,7 +14,7 @@ First start the server!
 $ docker run -d \
     -p 28778:28778 \
     --name logio \
-    blacklabelops/logio
+    quay.io/blacklabelops/logio
 ~~~~
 
 > Browser: Localhost: http://localhost:28778/, Docker-Tools (Windows, Mac): http://192.168.99.100:28778/
@@ -29,7 +29,7 @@ $ docker run -d \
 	-e "LOG_FILE_PATTERN=*.log" \
   --name harvester \
   --user root \
-  blacklabelops/logio harvester
+  quay.io/blacklabelops/logio harvester
 ~~~~
 
 > This will harvest all your Docker logfiles and stream them to your webserver.
@@ -44,7 +44,7 @@ First start the server!
 $ docker run -d \
     -p 28778:28778 \
     --name logio \
-    blacklabelops/logio
+    quay.io/blacklabelops/logio
 ~~~~
 
 > Browser: Localhost: http://localhost:28778/, Docker-Tools (Windows, Mac): http://192.168.99.100:28778/
@@ -56,7 +56,7 @@ $ docker run -d \
     -e "LOGIO_HARVESTER_LOGFILES=/home/logio/test.log" \
     --link logio:logio \
     --name harvester \
-    blacklabelops/logio harvester
+    quay.io/blacklabelops/logio harvester
 ~~~~
 
 Create the log file and write something!
@@ -79,7 +79,7 @@ $ docker run -d \
     -e "LOGIO_ADMIN_USER=admin" \
     -e "LOGIO_ADMIN_PASSWORD=yourpasswordhere" \
     --name logio \
-    blacklabelops/logio
+    quay.io/blacklabelops/logio
 ~~~~
 
 > Access will be secured by http auth.
@@ -105,7 +105,7 @@ $ docker run -d \
     -e "LOGIO_ADMIN_PASSWORD=yourpasswordhere" \
     -e "LOGIO_CERTIFICATE_DNAME=/CN=SBleul/OU=Blacklabelops/O=blacklabelops.com/L=Munich/C=DE" \
     --name logio \
-    blacklabelops/logio
+    quay.io/blacklabelops/logio
 ~~~~
 
 > Note: Webserver will use same port for HTTPS!
@@ -123,7 +123,7 @@ $ docker run -d \
     -e "LOGIO_CERTIFICATE_DNAME=HTTPS" \
     -v /yourcertificatepath:/opt/server/keys \
     --name logio \
-    blacklabelops/logio
+    quay.io/blacklabelops/logio
 ~~~~
 
 > Note: Webserver will use same port for HTTPS!
@@ -139,7 +139,7 @@ $ docker run -d \
     --link logio:logio \
     --name harvester \
     --user root \
-    blacklabelops/logio harvester
+    quay.io/blacklabelops/logio harvester
 ~~~~
 
 > The user parameter works both with username and userid. Note: This container only knows users root (uid:0) and logio (uid:1000). In order to introduce new users, you will have to extend the image!
@@ -155,7 +155,7 @@ $ docker run -d \
 	-e "LOG_FILE_PATTERN=*" \
   --name harvester \
   --user root \
-  blacklabelops/logio harvester
+  quay.io/blacklabelops/logio harvester
 ~~~~
 
 > Attaches to all files inside those folders
