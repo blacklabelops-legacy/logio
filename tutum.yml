@@ -1,24 +1,23 @@
-# Work in Progress
+harvester:
+  image: 'quay.io/blacklabelops/logioharvester:latest'
+  environment:
+    - DELAYED_START=60
+    - LOGIO_HARVESTER_LOGFILES=
+    - LOGIO_HARVESTER_NODENAME=DockerLogs
+    - LOGIO_HARVESTER_STREAMNAME=UnifiedLogs
+    - LOGS_DIRECTORIES=/var/lib/docker
+    - 'LOG_FILE_PATTERN=*.log'
+  links:
+    - 'logioweb:logio'
+  volumes:
+    - '/var/lib/docker:/var/lib/docker'
 logioweb:
   image: 'quay.io/blacklabelops/logio:latest'
   environment:
-    - 'LOGIO_ADMIN_USER=admin'
-    - 'LOGIO_ADMIN_PASSWORD=**your.password.here**'
+    - LOGIO_ADMIN_PASSWORD=admin
+    - 'LOGIO_ADMIN_USER=**your.password.here**'
     - LOGIO_CERTIFICATE_DNAME=
   ports:
     - '28778:28778'
   volumes:
-    - '/opt/server'
-harvester:
-  image: 'quay.io/blacklabelops/logioharvester:latest'
-  environment:
-    - 'DELAYED_START=20'
-    - 'LOGIO_HARVESTER_NODENAME=DockerLogs'
-    - 'LOGIO_HARVESTER_STREAMNAME=UnifiedLogs'
-    - 'LOGIO_HARVESTER_LOGFILES='
-    - 'LOGS_DIRECTORIES=/var/lib/docker'
-    - 'LOG_FILE_PATTERN=*.log'
-  volumes:
-    - '/var/lib/docker:/var/lib/docker'
-  links:
-    - logioweb:logio
+    - /opt/server
