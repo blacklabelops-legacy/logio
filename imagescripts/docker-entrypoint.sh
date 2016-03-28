@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 set -o errexit
 
 mkdir -p ~/.log.io
@@ -69,7 +69,7 @@ if [ -n "${LOGIO_HARVESTER_LOGFILES}" ]; then
 fi
 
 SAVEIFS=$IFS
-IFS=' '
+IFS=$' '
 COUNTER=0
 for logfile in $harvester_log_files
 do
@@ -96,12 +96,13 @@ do
   for d in ${log_dirs}
   do
     LOG_PATTERN_FILES=
-    IFS='\n'
-    for foundfile in $(find ${d} -type f -iname "${pattern}");
+    IFS=$'\n'
+    CRAWLED_LOGFILES=$(find ${d} -type f -iname "${pattern}")
+    for foundfile in $CRAWLED_LOGFILES;
     do
       LOG_PATTERN_FILES=$LOG_PATTERN_FILES\"${foundfile}\",$'\n'
     done
-    IFS=' '
+    IFS=$' '
   done
 done
 IFS=$SAVEIFS
