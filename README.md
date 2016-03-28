@@ -35,16 +35,18 @@ Now Harvest Your Docker Logs!
 
 ~~~~
 $ docker run -d \
-	-v /var/lib/docker:/var/lib/docker \
-  -e "LOGS_DIRECTORIES=/var/lib/docker" \
+	-v /var/lib/docker/containers:/var/lib/docker/containers \
+  -e "LOGS_DIRECTORIES=/var/lib/docker/containers" \
   --link logio:logio \
-	-e "LOG_FILE_PATTERN=*.log" \
+	-e "LOG_FILE_PATTERN=*-json.log" \
   --name harvester \
   --user root \
   quay.io/blacklabelops/logio harvester
 ~~~~
 
 > This will harvest all your Docker logfiles and stream them to your webserver.
+
+> Note: When you use docker-tools you may have to ssh into the machine ('docker-machine ssh') to be able to volume the directory /var/lib/docker/containers
 
 # How It Works
 
