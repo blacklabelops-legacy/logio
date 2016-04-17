@@ -89,13 +89,13 @@ if [ -n "${LOG_FILE_PATTERN}" ]; then
   log_file_pattern=${LOG_FILE_PATTERN}
 fi
 
+LOG_PATTERN_FILES=
 SAVEIFS=$IFS
 IFS=' '
 for pattern in "${log_file_pattern}"
 do
   for d in ${log_dirs}
   do
-    LOG_PATTERN_FILES=
     IFS=$'\n'
     CRAWLED_LOGFILES=$(find ${d} -type f -iname "${pattern}")
     for foundfile in $CRAWLED_LOGFILES;
