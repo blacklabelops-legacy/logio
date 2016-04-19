@@ -113,6 +113,16 @@ if [ -n "${ATTACH_LOGS}" ]; then
   ATTACH_LOGS=${ATTACH_LOGS::-2}
 fi
 
+logio_master="logio";
+logio_master_port="28777";
+
+if [ -n "${LOGIO_HARVESTER_MASTER_HOST}" ]; then
+  logio_master=${LOGIO_HARVESTER_MASTER_HOST}
+fi
+if [ -n "${LOGIO_HARVESTER_MASTER_PORT}" ]; then
+  logio_master_port=${LOGIO_HARVESTER_MASTER_PORT}
+fi
+
 cat > ~/.log.io/harvester.conf <<_EOF_
 exports.config = {
   nodeName: "${logio_nodename}",
@@ -122,8 +132,8 @@ exports.config = {
     ]
   },
   server: {
-    host: 'logio',
-    port: 28777
+    host: '${logio_master}',
+    port: ${logio_master_port}
   }
 }
 _EOF_

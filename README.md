@@ -26,7 +26,7 @@ First start the server!
 $ docker run -d \
     -p 28778:28778 \
     --name logio \
-    quay.io/blacklabelops/logio
+    blacklabelops/logio
 ~~~~
 
 > Browser: Localhost: http://localhost:28778/, Docker-Tools (Windows, Mac): http://192.168.99.100:28778/
@@ -35,13 +35,13 @@ Now Harvest Your Docker Logs!
 
 ~~~~
 $ docker run -d \
-	-v /var/lib/docker/containers:/var/lib/docker/containers \
-  -e "LOGS_DIRECTORIES=/var/lib/docker/containers" \
-  --link logio:logio \
-	-e "LOG_FILE_PATTERN=*-json.log" \
-  --name harvester \
-  --user root \
-  quay.io/blacklabelops/logio harvester
+	 -v /var/lib/docker/containers:/var/lib/docker/containers \
+    -e "LOGS_DIRECTORIES=/var/lib/docker/containers" \
+    --link logio:logio \
+  	-e "LOG_FILE_PATTERN=*-json.log" \
+    --name harvester \
+    --user root \
+    blacklabelops/logio harvester
 ~~~~
 
 > This will harvest all your Docker logfiles and stream them to your webserver.
@@ -58,7 +58,7 @@ First start the server!
 $ docker run -d \
     -p 28778:28778 \
     --name logio \
-    quay.io/blacklabelops/logio
+    blacklabelops/logio
 ~~~~
 
 > Browser: Localhost: http://localhost:28778/, Docker-Tools (Windows, Mac): http://192.168.99.100:28778/
@@ -70,7 +70,7 @@ $ docker run -d \
     -e "LOGIO_HARVESTER_LOGFILES=/home/logio/test.log" \
     --link logio:logio \
     --name harvester \
-    quay.io/blacklabelops/logio harvester
+    blacklabelops/logio harvester
 ~~~~
 
 Create the log file and write something!
@@ -93,7 +93,7 @@ $ docker run -d \
     -e "LOGIO_ADMIN_USER=admin" \
     -e "LOGIO_ADMIN_PASSWORD=yourpasswordhere" \
     --name logio \
-    quay.io/blacklabelops/logio
+    blacklabelops/logio
 ~~~~
 
 > Access will be secured by http auth.
@@ -119,7 +119,7 @@ $ docker run -d \
     -e "LOGIO_ADMIN_PASSWORD=yourpasswordhere" \
     -e "LOGIO_CERTIFICATE_DNAME=/CN=SBleul/OU=Blacklabelops/O=blacklabelops.com/L=Munich/C=DE" \
     --name logio \
-    quay.io/blacklabelops/logio
+    blacklabelops/logio
 ~~~~
 
 > Note: Webserver will use same port for HTTPS!
@@ -137,7 +137,7 @@ $ docker run -d \
     -e "LOGIO_CERTIFICATE_DNAME=HTTPS" \
     -v /yourcertificatepath:/opt/server/keys \
     --name logio \
-    quay.io/blacklabelops/logio
+    blacklabelops/logio
 ~~~~
 
 > Note: Webserver will use same port for HTTPS!
@@ -153,7 +153,7 @@ $ docker run -d \
     --link logio:logio \
     --name harvester \
     --user root \
-    quay.io/blacklabelops/logio harvester
+    blacklabelops/logio harvester
 ~~~~
 
 > The user parameter works both with username and userid. Note: This container only knows users root (uid:0) and logio (uid:1000). In order to introduce new users, you will have to extend the image!
@@ -164,15 +164,57 @@ Log file pattern with the ability to define file patterns.
 
 ~~~~
 $ docker run -d \
-  -e "LOGS_DIRECTORIES=/var/log" \
-  --link logio:logio \
-	-e "LOG_FILE_PATTERN=*" \
-  --name harvester \
-  --user root \
-  quay.io/blacklabelops/logio harvester
+    -e "LOGS_DIRECTORIES=/var/log" \
+    --link logio:logio \
+  	-e "LOG_FILE_PATTERN=*" \
+    --name harvester \
+    --user root \
+    blacklabelops/logio harvester
 ~~~~
 
 > Attaches to all files inside those folders
+
+# Harvester Master Host and port
+
+This is an example on connecting to a logio master without direct linking.
+
+You can specify the logio master host and port with:
+
+* LOGIO_HARVESTER_MASTER_HOST (default: `logio`)
+* LOGIO_HARVESTER_MASTER_PORT (default: `28777`)
+
+Create a test network:
+
+~~~~
+$ docker network create logio
+~~~~
+
+First start the master:
+
+~~~~
+$ docker run -d \
+    -p 28778:28778 \
+    --name master \
+    --net logio \
+    --net-alias master \
+    blacklabelops/logio
+~~~~
+
+> Runs on different hostname. UI runs on http://yourdockerhost:28778.
+
+Now connect with the slave:
+
+~~~~
+$ docker run -d \
+    -e "LOGIO_HARVESTER_LOGFILES=/home/logio/test.log" \
+    -e "LOGIO_HARVESTER_MASTER_HOST=master" \
+    -e "LOGIO_HARVESTER_MASTER_PORT=28777" \
+    --name harvester \
+    --net logio \
+    --user root \
+    blacklabelops/logio harvester
+~~~~
+
 
 # Vagrant
 
