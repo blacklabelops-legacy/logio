@@ -4,8 +4,6 @@
 
 [![Deploy to Tutum](https://s.tutum.co/deploy-to-tutum.svg)](https://dashboard.tutum.co/stack/deploy/)
 
-Leave a message and ask questions on Hipchat: [blacklabelops/hipchat](https://www.hipchat.com/geogBFvEM)
-
 # Make It Short!
 
 In short, this container puts an UI on your Docker logs!
@@ -236,7 +234,11 @@ First install:
 * [Vagrant](https://www.vagrantup.com/)
 * [Virtualbox](https://www.virtualbox.org/)
 
-## References
+# Support
+
+Leave a message and ask questions on Hipchat: [blacklabelops/hipchat](http://support.blacklabelops.com)
+
+# References
 
 * [Log.io](http://logio.org/)
 * [Docker Homepage](https://www.docker.com/)
