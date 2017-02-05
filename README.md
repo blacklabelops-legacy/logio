@@ -1,8 +1,6 @@
-[![Circle CI](https://circleci.com/gh/blacklabelops/logio/tree/master.svg?style=shield)](https://circleci.com/gh/blacklabelops/logio/tree/master)
-[![Image Layers](https://badge.imagelayers.io/blacklabelops/logio:latest.svg)](https://imagelayers.io/?images=blacklabelops/logio:latest 'Get your own badge on imagelayers.io')
-[![Docker Repository on Quay](https://quay.io/repository/blacklabelops/logio/status "Docker Repository on Quay")](https://quay.io/repository/blacklabelops/logio)
+# Dockerized Logio
 
-[![Deploy to Tutum](https://s.tutum.co/deploy-to-tutum.svg)](https://dashboard.tutum.co/stack/deploy/)
+[![Docker Stars](https://img.shields.io/docker/stars/blacklabelops/logio.svg)](https://hub.docker.com/r/blacklabelops/logio/) [![Docker Pulls](https://img.shields.io/docker/pulls/blacklabelops/logio.svg)](https://hub.docker.com/r/blacklabelops/logio/)
 
 # Make It Short!
 
