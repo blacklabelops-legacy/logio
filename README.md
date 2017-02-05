@@ -162,7 +162,7 @@ You can define an arbitrary number of streams with individual streamname, direct
 
 * `LOGIO_HARVESTER1STREAMNAME`: The streamname, e.g. `MyFantasticStreamname`
 * `LOGIO_HARVESTER1LOGSTREAMS`: The logfile directories, space separated, e.g.: `/var/log /testlog` or `/dir1 /dir2 /dir3`
-* `LOGIO_HARVESTER1FILEPATTERN`: The logfile pattern e.g. `*.xml` or `*.log`
+* `LOGIO_HARVESTER1FILEPATTERN`: The logfile patterns, space separated, e.g. `*.xml *.log`
 
 > Note that the variables must be enumerated (`1`,`2`,`3` and so on) starting from `1` for an arbitrary amount of definitions!
 
@@ -174,14 +174,14 @@ $ docker run -d \
 	-e "LOGIO_HARVESTER1LOGSTREAMS=/tests" \
 	-e "LOGIO_HARVESTER1FILEPATTERN=*.xml" \
 	-e "LOGIO_HARVESTER2STREAMNAME=teststream2" \
-	-e "LOGIO_HARVESTER2LOGSTREAMS=/tests" \
-	-e "LOGIO_HARVESTER2FILEPATTERN=*.log" \
+	-e "LOGIO_HARVESTER2LOGSTREAMS=/tests2" \
+	-e "LOGIO_HARVESTER2FILEPATTERN=*.log *.xml" \
   --link logio:logio \
   --name harvester \
   blacklabelops/logio harvester
 ~~~~
 
-> Attaches to all files matching the pattern inside those folders.
+> Attaches to all files matching the patterns inside those folders.
 
 # Harvester Master Host and port
 

@@ -68,7 +68,8 @@ function crawlParameterizedLogFiles() {
   VAR_LOGIO_HARVESTER_FILEPATTERN="LOGIO_HARVESTER${i}FILEPATTERN"
 
   log_dirs=${!VAR_LOGIO_HARVESTER_LOGSTREAMS}
-  local log_file_pattern=(${!VAR_LOGIO_HARVESTER_FILEPATTERN})
+  local log_file_pattern
+  read -r -a log_file_pattern <<< "${!VAR_LOGIO_HARVESTER_FILEPATTERN}"
 
   LOG_PATTERN_FILES=""
   SAVEIFS=$IFS
