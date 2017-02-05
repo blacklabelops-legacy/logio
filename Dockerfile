@@ -41,6 +41,6 @@ VOLUME ["${VOLUME_DIRECTORY}"]
 EXPOSE 28778 28777
 
 USER $CONTAINER_UID
-COPY imagescripts/docker-entrypoint.sh /opt/logio/docker-entrypoint.sh
+COPY imagescripts/*.sh /opt/logio/
 ENTRYPOINT ["/opt/logio/docker-entrypoint.sh"]
 CMD ["logio"]

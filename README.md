@@ -74,8 +74,8 @@ $ docker run -d \
 Create the log file and write something!
 
 ~~~~
-$ docker exec harvester bash -c "touch /home/logio/test.log"
-$ docker exec harvester bash -c "echo "Hello World" >> /home/logio/test.log"
+$ docker exec harvester bash -c 'touch /home/logio/test.log'
+$ docker exec harvester bash -c 'echo "Hello World" >> /home/logio/test.log'
 ~~~~
 
 # Webserver Admin Account
@@ -158,19 +158,30 @@ $ docker run -d \
 
 # Harvester Crawl for Log Files
 
+You can define an arbitrary number of streams with individual streamname, directories and logfile patterns! With the environment variables:
+
+* `LOGIO_HARVESTER1STREAMNAME`: The streamname, e.g. `MyFantasticStreamname`
+* `LOGIO_HARVESTER1LOGSTREAMS`: The logfile directories, space separated, e.g.: `/var/log /testlog` or `/dir1 /dir2 /dir3`
+* `LOGIO_HARVESTER1FILEPATTERN`: The logfile pattern e.g. `*.xml` or `*.log`
+
+> Note that the variables must be enumerated (`1`,`2`,`3` and so on) starting from `1` for an arbitrary amount of definitions!
+
 Log file pattern with the ability to define file patterns.
 
 ~~~~
 $ docker run -d \
-    -e "LOGS_DIRECTORIES=/var/log" \
-    --link logio:logio \
-  	-e "LOG_FILE_PATTERN=*" \
-    --name harvester \
-    --user root \
-    blacklabelops/logio harvester
+  -e "LOGIO_HARVESTER1STREAMNAME=teststream1" \
+	-e "LOGIO_HARVESTER1LOGSTREAMS=/tests" \
+	-e "LOGIO_HARVESTER1FILEPATTERN=*.xml" \
+	-e "LOGIO_HARVESTER2STREAMNAME=teststream2" \
+	-e "LOGIO_HARVESTER2LOGSTREAMS=/tests" \
+	-e "LOGIO_HARVESTER2FILEPATTERN=*.log" \
+  --link logio:logio \
+  --name harvester \
+  blacklabelops/logio harvester
 ~~~~
 
-> Attaches to all files inside those folders
+> Attaches to all files matching the pattern inside those folders.
 
 # Harvester Master Host and port
 
