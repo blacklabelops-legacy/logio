@@ -74,7 +74,8 @@ function crawlParameterizedLogFiles() {
   LOG_PATTERN_FILES=""
   SAVEIFS=$IFS
   IFS=' '
-  for (( i=0; i < ${#log_file_pattern}; i++ ))
+  local i=0
+  for (( i; i < ${#log_file_pattern}; i++ ))
   do
     pattern="${log_file_pattern[$i]}"
     for d in ${log_dirs}
@@ -115,7 +116,8 @@ function crawlLegacyLogfileMechanism() {
 }
 
 function crawlEnumeratedConfiguration() {
-  for (( i=1; ; i++ ))
+  local i=1
+  for (( i; ; i++ ))
   do
     VAR_LOGIO_HARVESTER_STREAMNAME="LOGIO_HARVESTER${i}STREAMNAME"
     if [ ! -n "${!VAR_LOGIO_HARVESTER_STREAMNAME}" ]; then
