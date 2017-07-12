@@ -1,0 +1,18 @@
+{
+  "name": "config-gen",
+  "version": "1.0.0",
+  "description": "Generates log.io harvester config files based on running docker containers",
+  "main": "detect_containers.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Richard Bateman <taxilian@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "docker-events": "0.0.2",
+    "dockerode": "^2.5.0",
+    "lodash": "^4.17.4",
+    "node-docker-api": "^1.1.15",
+    "which": "^1.2.14"
+  }
+}
