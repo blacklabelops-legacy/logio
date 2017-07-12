@@ -15,14 +15,17 @@ ENV VOLUME_DIRECTORY=/opt/server
 RUN DEBIAN_FRONTEND=noninteractive apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y wget openssl build-essential \
     && mkdir -p ${VOLUME_DIRECTORY}/keys \
+    && mkdir -p /opt/configGen \
     && chown -R $CONTAINER_UID:$CONTAINER_GID ${VOLUME_DIRECTORY}/keys \
     && npm install -g log.io pm2 --user 'root' \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists \
     && rm -rf /tmp/*
 
-COPY configGen /opt/configGen
+COPY configGen/package.json opt/configGen/package.json
 RUN cd /opt/configGen && npm i
+
+COPY configGen/*.js /opt/configGen/
 
 ENV DELAYED_START=
 ENV LOGIO_ADMIN_USER=

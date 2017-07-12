@@ -18,7 +18,7 @@ const requireExplicit = process.env.LOGIO_REQUIRE_EXPLICIT == 1;
 const logio_nodeName = process.env.LOGIO_HARVESTER_NODENAME || "node";
 const logio_streamPrefix = process.env.LOGIO_HARVESTER_PREFIX || null;
 const logio_master = process.env.LOGIO_HARVESTER_MASTER_HOST || "logio";
-const logio_masterPort = process.env.LOGIO_HARVESTER_MASTER_HOST || "28777";
+const logio_masterPort = process.env.LOGIO_HARVESTER_MASTER_PORT || "28777";
 
 const docker_sock = process.env.DOCKER_SOCKET || "/tmp/docker.sock";
 
@@ -114,6 +114,17 @@ function startHarvester() {
         console.log("Harvester terminated:", err, stderr);
         setImmediate(startHarvester);
     });
+    harvester.stdout.on('data', function (data) {
+        console.log('stdout: ' + data.toString());
+    });
+
+    harvester.stderr.on('data', function (data) {
+        console.log('stderr: ' + data.toString());
+    });
+
+    harvester.on('exit', function (code) {
+        console.log('child process exited with code ' + code.toString());
+    });    
     console.log("Re-spawned harvester");
 }
 
