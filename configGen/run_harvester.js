@@ -58,10 +58,13 @@ function refreshConfig() {
             if (logio_streamPrefix) { name = `${logio_streamPrefix}${name}`; }
             let logPath = c.data.LogPath;
 
-            config[name] = {
-                name: name,
-                path: logPath
-            };
+            if (!config[name]) {
+                config[name] = {
+                    name: name,
+                    path: []
+                };
+            }
+            config[name].path.push(logPath);
         }
         return config;
     }).then(generateConfigFile);
@@ -74,7 +77,13 @@ exports.config = {
     logStreams: {`;
     for (let stream of Object.keys(config)) {
         configFile += `
-        ${JSON.stringify(stream)}: [${JSON.stringify(config[stream].path)}],`;
+        ${JSON.stringify(stream)}: [`;
+        for (let p of config[stream].path) {
+            configFile += `
+            ${JSON.stringify(p)},`;
+        }
+        configFile += `
+        ],`;
     }
 
     configFile += `
@@ -88,7 +97,7 @@ exports.config = {
     return configFile;
 }
 
-function updateConfig(msg) {
+let updateConfig = function updateConfig(msg) {
     if (msg) {
         console.warn("Message from docker:", msg);
     }
