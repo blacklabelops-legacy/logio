@@ -132,7 +132,7 @@ function startHarvester() {
     });
 
     harvester.on('exit', function (code) {
-        console.log('child process exited with code ' + code.toString());
+        console.log('child process exited with code ', code);
     });    
     console.log("Re-spawned harvester");
 }
