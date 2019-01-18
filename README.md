@@ -1,7 +1,5 @@
 # Dockerized Logio
 
-[![Docker Stars](https://img.shields.io/docker/stars/blacklabelops/logio.svg)](https://hub.docker.com/r/blacklabelops/logio/) [![Docker Pulls](https://img.shields.io/docker/pulls/blacklabelops/logio.svg)](https://hub.docker.com/r/blacklabelops/logio/)
-
 # Make It Short!
 
 In short, this container puts an UI on your Docker logs!
@@ -242,10 +240,7 @@ First install:
 
 * [Vagrant](https://www.vagrantup.com/)
 * [Virtualbox](https://www.virtualbox.org/)
-
-# Support
-
-Leave a message and ask questions on Hipchat: [blacklabelops/hipchat](http://support.blacklabelops.com)
+ssage and ask questions on Hipchat: [blacklabelops/hipchat](http://support.blacklabelops.com)
 
 # References
 
