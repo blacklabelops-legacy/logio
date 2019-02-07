@@ -8,9 +8,8 @@ if [ "$1" = 'logio' ]; then
   source /opt/logio/serversetup.sh
   log.io-server
 elif [ "$1" = 'harvester' ]; then
-  source /opt/logio/harvestersetup.sh
-  printHarvesterConfigFile
-  log.io-harvester
+  cd /opt/configGen
+  node run_harvester.js
 else
   exec "$@"
 fi
